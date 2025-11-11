@@ -1,0 +1,16 @@
+[
+    {
+        "url": "https://www.linkedin.com/in/corentinthomasset/",
+        "icon": "i-lucide-linkedin" 
+    },
+    {
+        "url": "https://github.com/corentinthomasset",
+        "icon": "i-lucide-github",
+        "label": "corentinthomasset"
+    },
+    {
+        "url": "https://github.com/nzerolk",
+        "icon": "i-lucide-github",
+        "label": "nzerolk"
+    }
+]
