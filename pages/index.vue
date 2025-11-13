@@ -28,7 +28,7 @@ d888888b db   db  .d88b.  .88b  d88.  .d8b.  .d8888. .d8888. d88888b d888888b
         <div class="relative mt-12 mb-14">
           <ActionBar>
             <div class="flex items-center flex-1 gap-2 @4xl:flex-row-reverse @md:justify-center">
-              <button class="bg-green-500 hover:bg-green-400 dark:shadow-xl text-green-100 shadow border border-green-400 cursor-pointer rounded-xl h-10 shrink-0 text-md flex items-center justify-center px-4 gap-2 font-semibold">👋 Say hi!</button>
+              <SayHi/>
               <div class="flex items-center justify-between @md:justify-start gap-1 flex-1">
                 <ActionLink url="#" v-motion-slide-bottom icon="i-lucide-mail"/>
                 <ActionLink url="#" v-motion-slide-bottom :delay="50" icon="i-lucide-linkedin"/>
