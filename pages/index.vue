@@ -2,6 +2,7 @@
 import timelineItems from "@/assets/timeline.json"
 import projects from "~/assets/projects"
 import footerLinks from "@/assets/footerLinks.json"
+import actionLinks from "@/assets/actionLinks.json"
 </script>
 
 <template>
@@ -30,10 +31,7 @@ d888888b db   db  .d88b.  .88b  d88.  .d8b.  .d8888. .d8888. d88888b d888888b
             <div class="flex items-center flex-1 gap-2 @4xl:flex-row-reverse @md:justify-center">
               <SayHi/>
               <div class="flex items-center justify-between @md:justify-start gap-1 flex-1">
-                <ActionLink url="#" v-motion-slide-bottom icon="i-lucide-mail"/>
-                <ActionLink url="#" v-motion-slide-bottom :delay="50" icon="i-lucide-linkedin"/>
-                <ActionLink url="#" v-motion-slide-bottom :delay="100" icon="i-lucide-github"/>
-                <ActionLink url="#" v-motion-slide-bottom :delay="150" icon="i-lucide-github"/>
+                <ActionLink v-for="(link, index) in actionLinks" :url="link.url" :key="link.url" :icon="link.icon" :delay="index * 50"/>
               </div>
               <h1 class="hidden @4xl:block font-semibold pr-4 border-r border-r-border">Corentin Thomasset</h1>
             </div>
