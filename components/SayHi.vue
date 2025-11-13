@@ -39,7 +39,23 @@ function sayHi() {
 }
 
 function onSubmit(event: FormSubmitEvent<Schema>) {
-  toast.add({ title: event.data.name,  description: `Hi ${'again '.repeat(store.value.counter)} from ${name(event.data.country)} ${flag(event.data.country)}!`, progress: false, close: false, color: 'ghost' })
+  const counter = store.value.counter
+  toast.add({ title: event.data.name,  description: `Hi ${'again '.repeat(counter)} from ${name(event.data.country)} ${flag(event.data.country)}!`, progress: false, close: false, color: 'ghost' })
+  if (counter === 0){
+    setTimeout(() => {
+      toast.add({ title: "Corentin",  description: `Thanks so much for stopping by! 🙌 I'd love to chat about tech, opportunities, or anything else on your mind. Feel free to reach out via email or LinkedIn. Let's connect!`, progress: false, close: false, color: 'ghost', duration: 10000 })
+    }, 1000)
+  }
+  if (counter > 0 && counter < 3){
+    setTimeout(() => {
+      toast.add({ title: "Corentin",  description: `Hi ${'again '.repeat(counter)} from ${name('CA')} ${flag('CA')}!`, progress: false, close: false, color: 'ghost' })
+    }, 1000)
+  }
+  if (counter === 3){
+    setTimeout(() => {
+      toast.add({ title: "Corentin",  description: `Fanatic clicker mode unlocked 🔥`, progress: false, close: false, color: 'ghost' })
+    }, 1000)
+  }
   store.value.name = event.data.name
   store.value.counter += 1
 }
@@ -55,7 +71,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
       <UForm :schema="schema" :state="state" class="w-full max-w-4xl p-6 text-xl" @submit="onSubmit">
         <div class="flex items-center justify-between p-6 bg-muted/50 dark:shadow-2xl border border-border/50 backdrop-blur-sm rounded-2xl shadow" v-motion-slide-bottom>
           <div class="font-semibold">
-            <div class="text-sm">{{ state.name }}</div>
+            <div class="text-sm">{{ state.name || 'Bob' }}</div>
             Hi from {{ name(state.country || 'CA') }} {{ flag(state.country || 'CA') }}
           </div>
           <button class="bg-green-500 hover:bg-green-400 dark:shadow-xl text-green-100 shadow border border-green-400 cursor-pointer rounded-xl size-10 shrink-0 text-md flex items-center justify-center text-xl font-semibold focus:outline-none" type="submit">
