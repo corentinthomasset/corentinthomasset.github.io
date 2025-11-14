@@ -3,6 +3,7 @@ import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { countries, flag, name } from 'country-emoji'
 import { useStorage } from '@vueuse/core'
+import confetti from 'canvas-confetti'
 
 const toast = useToast()
 const store = useStorage('hi-store', { greeted: false, name: 'Bob', counter: 0 })
@@ -39,7 +40,8 @@ function sayHi() {
 
 function onSubmit(event: FormSubmitEvent<Schema>) {
   const counter = store.value.counter
-  toast.add({ title: event.data.name, description: `Hi ${'again '.repeat(counter)} from ${name(event.data.country)} ${flag(event.data.country)}!`, progress: false, close: false, color: 'ghost' })
+  if (counter < 4)
+    toast.add({ title: event.data.name, description: `Hi ${'again '.repeat(counter)} from ${name(event.data.country)} ${flag(event.data.country)}!`, progress: false, close: false, color: 'ghost' })
   if (counter === 0) {
     setTimeout(() => {
       toast.add({
@@ -62,8 +64,17 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
       toast.add({ title: 'Corentin', description: `Fanatic clicker mode unlocked 🔥`, progress: false, close: false, color: 'ghost' })
     }, 1000)
   }
+  if (counter > 3) fireworks(500)
   store.value.name = event.data.name
   store.value.counter += 1
+}
+
+function fireworks(duration: number) {
+  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }
+  const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min
+  const particleCount = 50
+  confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } })
+  confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } })
 }
 </script>
 
@@ -82,8 +93,12 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
       👋 <span class="@md:hidden">Say hi!</span>
     </button>
     <template #content>
-      <UForm :schema="schema" :state="state" class="w-full max-w-4xl p-6 text-xl" @submit="onSubmit">
-        <div class="bg-muted/50 border-border/50 flex items-center justify-between rounded-2xl border p-6 shadow backdrop-blur-sm dark:shadow-2xl" v-motion-slide-bottom>
+      <div v-if="store.counter > 3" v-motion-slide-bottom class="text-center">
+        <div ref="hi-score-counter" class="text-foreground text-8xl font-bold">{{ store.counter }}</div>
+        <div class="text-foreground text-4xl">hi score</div>
+      </div>
+      <UForm :schema="schema" :state="state" class="w-full max-w-4xl border-none p-6 text-xl" @submit="onSubmit">
+        <div v-motion-slide-bottom class="bg-muted/50 border-border/50 flex items-center justify-between rounded-2xl border p-6 shadow backdrop-blur-sm dark:shadow-2xl">
           <div class="font-semibold">
             <div class="text-sm">{{ state.name || 'Bob' }}</div>
             Hi from {{ name(state.country || 'CA') }} {{ flag(state.country || 'CA') }}
@@ -95,11 +110,11 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
             <UIcon name="i-lucide-send-horizontal" />
           </button>
         </div>
-        <div class="bg-muted/50 border-border/50 mt-4 flex flex-col gap-4 rounded-2xl border p-6 shadow backdrop-blur-sm dark:shadow-2xl" v-motion-slide-bottom :delay="100">
-          <UFormField label="What's your name?" name="name" class="flex-1">
-            <UInput v-model="state.name" placeholder="Bob" size="xl" class="w-full" />
+        <div v-motion-slide-bottom :delay="100" class="bg-muted/50 border-border/50 mt-4 flex flex-col gap-4 rounded-2xl border p-6 shadow backdrop-blur-sm dark:shadow-2xl">
+          <UFormField class="flex-1" label="What's your name?" name="name">
+            <UInput v-model="state.name" class="w-full" placeholder="Bob" size="xl" />
           </UFormField>
-          <UFormField label="Where are your form?" name="country" class="flex-1">
+          <UFormField class="flex-1" label="Where are your form?" name="country">
             <USelectMenu v-model="state.country" :items="countrySelectItems" class="w-full" size="xl" value-key="value" />
           </UFormField>
         </div>

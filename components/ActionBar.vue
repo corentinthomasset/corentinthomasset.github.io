@@ -67,8 +67,10 @@ onMounted(() => {
           class="text-muted-foreground/50 size-4 cursor-move"
           name="i-lucide-grip"
           @mousedown="
-            draggable = true
-            dragging = true
+            () => {
+              draggable = true
+              dragging = true
+            }
           "
         />
         <slot />
