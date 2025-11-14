@@ -30,7 +30,7 @@ d888888b db   db  .d88b.  .88b  d88.  .d8b.  .d8888. .d8888. d88888b d888888b
           <ActionBar>
             <div class="flex items-center flex-1 gap-2 @4xl:flex-row-reverse @md:justify-center">
               <SayHi/>
-              <div class="flex items-center justify-between @md:justify-start gap-1 flex-1">
+              <div class="flex items-center justify-between @md:justify-start gap-1 flex-1 @md:flex-none @4xl:flex-1">
                 <ActionLink v-for="(link, index) in actionLinks" :url="link.url" :key="link.url" :icon="link.icon" :delay="index * 50"/>
               </div>
               <h1 class="hidden @4xl:block font-semibold pr-4 border-r border-r-border">Corentin Thomasset</h1>

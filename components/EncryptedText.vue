@@ -1,11 +1,6 @@
 <template>
   <span class="encrypted-text">
-    <span
-      v-for="(char, index) in displayText"
-      :key="index"
-      :class="['letter', { 'space': char === ' ' }]"
-      :style="{ animationDelay: `${index * 0.1}s` }"
-    >
+    <span v-for="(char, index) in displayText" :key="index" :class="['letter', { space: char === ' ' }]" :style="{ animationDelay: `${index * 0.1}s` }">
       {{ char }}
     </span>
   </span>
@@ -22,7 +17,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   speed: 100, // milliseconds between character changes
-  pauseDuration: 2000 // milliseconds to show final text
+  pauseDuration: 2000, // milliseconds to show final text
 })
 
 const displayText = ref<string[]>([])
@@ -37,7 +32,7 @@ const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
 // Initialize display text with random characters
 const initializeText = () => {
-  displayText.value = props.text.split('').map(char => {
+  displayText.value = props.text.split('').map((char) => {
     if (char === ' ') return ' '
     const randomChar = chars[Math.floor(Math.random() * chars.length)]
     return randomChar || char
@@ -55,7 +50,7 @@ const startContinuousAnimation = () => {
         displayText.value[i] = ' '
         continue
       }
-      
+
       if (i <= decryptedUntil.value) {
         // Character is decrypted, keep it correct
         displayText.value[i] = currentChar || ''
@@ -65,10 +60,10 @@ const startContinuousAnimation = () => {
         displayText.value[i] = randomChar || ''
       }
     }
-    
+
     animationInterval = window.setTimeout(animate, props.speed)
   }
-  
+
   animate()
 }
 
@@ -77,19 +72,19 @@ const startDecryptionSequence = () => {
   let currentIndex = 0
   let iterationCount = 0
   const maxIterations = 5
-  
+
   const decryptNextChar = () => {
     if (currentIndex >= props.text.length) {
       // All characters decrypted
       isDecrypted.value = true
-      
+
       // Pause, then start encryption sequence
       pauseTimeout = window.setTimeout(() => {
         startEncryptionSequence()
       }, props.pauseDuration)
       return
     }
-    
+
     const currentChar = props.text[currentIndex]
     if (currentChar === ' ') {
       decryptedUntil.value = currentIndex
@@ -98,7 +93,7 @@ const startDecryptionSequence = () => {
       decryptionTimeout = window.setTimeout(decryptNextChar, props.speed)
       return
     }
-    
+
     if (iterationCount >= maxIterations) {
       // Reveal the correct character
       decryptedUntil.value = currentIndex
@@ -107,36 +102,36 @@ const startDecryptionSequence = () => {
     } else {
       iterationCount++
     }
-    
+
     decryptionTimeout = window.setTimeout(decryptNextChar, props.speed)
   }
-  
+
   decryptNextChar()
 }
 
-// Start encryption sequence  
+// Start encryption sequence
 const startEncryptionSequence = () => {
   isDecrypted.value = false
   let currentIndex = props.text.length - 1
-  
+
   const encryptNextChar = () => {
     if (currentIndex < 0) {
       // All characters encrypted
       decryptedUntil.value = -1
-      
+
       // Short pause, then start decryption again
       pauseTimeout = window.setTimeout(() => {
         startDecryptionSequence()
       }, 2000)
       return
     }
-    
+
     decryptedUntil.value = currentIndex - 1
     currentIndex--
-    
+
     decryptionTimeout = window.setTimeout(encryptNextChar, props.speed)
   }
-  
+
   encryptNextChar()
 }
 
@@ -172,23 +167,23 @@ onUnmounted(() => {
 
 <style scoped>
 .encrypted-text {
-    display: inline-block;
-    font-family: monospace;
-    font-weight: bold;
-    opacity: 1;
+  display: inline-block;
+  font-family: monospace;
+  font-weight: bold;
+  opacity: 1;
 }
 
 .letter {
-    text-transform: uppercase;
-    display: inline-block;
-    transition: color 0.1s ease;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: color 0.1s ease;
 }
 
 .letter.space {
-    width: 0.5em;
+  width: 0.5em;
 }
 
 .encrypted-text {
-    text-shadow: 0 0 5px currentColor;
+  text-shadow: 0 0 5px currentColor;
 }
 </style>

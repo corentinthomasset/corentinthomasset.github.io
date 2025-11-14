@@ -1,11 +1,16 @@
 <script setup lang="ts">
 const props = defineProps<{
-    url: string,
-    icon: string
+  url: string
+  icon: string
 }>()
-
 </script>
 
 <template>
-    <a :href="url" target="_blank" v-motion-slide-bottom class="bg-transparent hover:bg-black/20 text-muted-foreground hover:text-white cursor-pointer rounded-xl size-10 shrink-0 text-xl flex items-center justify-center"><UIcon :name="icon"/></a>
+  <a
+    :href="url"
+    target="_blank"
+    v-motion-slide-bottom
+    class="text-muted-foreground flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-transparent text-xl hover:bg-black/20 hover:text-white"
+    ><UIcon :name="icon"
+  /></a>
 </template>

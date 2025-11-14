@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const props = defineProps<{numDots: number, colorDots: string}>()
+const props = defineProps<{ numDots: number; colorDots: string }>()
 
 const container = ref<HTMLDivElement | null>(null)
 const canvas = ref<HTMLCanvasElement | null>(null)
@@ -10,8 +10,8 @@ let animationId: number | null = null
 const dots: Dot[] = []
 
 class Dot {
-  x:  number
-  y:  number
+  x: number
+  y: number
   vx: number
   vy: number
   radius: number
@@ -38,7 +38,7 @@ class Dot {
     }
 
     this.x = Math.max(0, Math.min(canvas.value.width, this.x))
-    this.y = Math.max(0, Math.min(canvas.value.height, this.y)) 
+    this.y = Math.max(0, Math.min(canvas.value.height, this.y))
   }
 
   draw() {
@@ -57,10 +57,7 @@ function initDots() {
   if (!canvas.value) return
   dots.length = 0
   for (let i = 0; i < props.numDots; i++) {
-    dots.push(new Dot(
-      Math.random() * canvas.value.width,
-      Math.random() * canvas.value.height
-    ))
+    dots.push(new Dot(Math.random() * canvas.value.width, Math.random() * canvas.value.height))
   }
 }
 
@@ -68,7 +65,7 @@ function animate() {
   if (!ctx || !canvas.value) return
   ctx.clearRect(0, 0, canvas.value.width, canvas.value.height)
 
-  dots.forEach(dot => {
+  dots.forEach((dot) => {
     dot.update()
     dot.draw()
   })
@@ -82,8 +79,8 @@ function initCanvas() {
   canvas.value.width = rect.width
   canvas.value.height = rect.height
   ctx = canvas.value.getContext('2d')
-  
-  if (!ctx ) return
+
+  if (!ctx) return
   ctx.fillStyle = '#000'
   ctx.fillRect(0, 0, canvas.value.width, canvas.value.height)
 
@@ -94,11 +91,11 @@ function initCanvas() {
 // Handle window resize
 function handleResize() {
   if (!canvas.value || !container.value) return
-  
+
   const rect = container.value.getBoundingClientRect()
   canvas.value.width = rect.width
   canvas.value.height = rect.height
-  
+
   initDots()
 }
 
@@ -116,7 +113,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="container" class="w-full h-full">
-      <canvas ref="canvas" />
+  <div ref="container" class="h-full w-full">
+    <canvas ref="canvas" />
   </div>
 </template>
