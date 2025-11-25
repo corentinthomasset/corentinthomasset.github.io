@@ -84,7 +84,7 @@ export default [
         label: 'research paper',
       },
       {
-        url: 'https://corentinthomasset.me/demo/sereniot/',
+        url: '/demo/sereniot/',
         icon: 'i-lucide-link-2',
         label: 'dashboard demo',
       },
