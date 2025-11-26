@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
+  ssr: false,
   routeRules: {
     '/demo/**': { prerender: false },
   },
@@ -15,6 +16,9 @@ export default defineNuxtConfig({
   icon: {
     mode: 'css',
     cssLayer: 'base',
+    clientBundle: {
+      scan: true,
+    },
   },
   colorMode: {
     preference: 'dark',
