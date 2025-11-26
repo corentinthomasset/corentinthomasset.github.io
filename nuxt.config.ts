@@ -12,4 +12,8 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  icon: {
+    mode: 'css',
+    cssLayer: 'base',
+  },
 })

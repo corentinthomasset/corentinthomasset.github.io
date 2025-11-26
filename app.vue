@@ -1,9 +1,4 @@
-<script lang="ts" setup>
-const colorMode = useColorMode()
-onMounted(() => {
-  colorMode.preference = 'dark'
-})
-</script>
+<script lang="ts" setup></script>
 <template>
   <UApp>
     <NuxtRouteAnnouncer />
