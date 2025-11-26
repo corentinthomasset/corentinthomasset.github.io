@@ -1,6 +1,8 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 const colorMode = useColorMode()
-colorMode.value = 'dark'
+onMounted(() => {
+  colorMode.value = 'dark'
+})
 </script>
 <template>
   <UApp>
