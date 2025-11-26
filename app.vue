@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 const colorMode = useColorMode()
 onMounted(() => {
-  colorMode.value = 'dark'
+  colorMode.preference = 'dark'
 })
 </script>
 <template>
   <UApp>
     <NuxtRouteAnnouncer />
-    <NuxtPage/>
+    <NuxtPage />
   </UApp>
 </template>
