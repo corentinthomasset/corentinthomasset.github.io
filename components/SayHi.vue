@@ -107,7 +107,7 @@ function fireworks(duration: number) {
             class="text-md flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-green-400 bg-green-500 text-xl font-semibold text-green-100 shadow hover:bg-green-400 focus:outline-none dark:shadow-xl"
             type="submit"
           >
-            <UIcon name="i-lucide-send-horizontal" />
+            <UIcon mode="svg" name="i-lucide-send-horizontal" />
           </button>
         </div>
         <div v-motion-slide-bottom :delay="100" class="bg-muted/50 border-border/50 mt-4 flex flex-col gap-4 rounded-2xl border p-6 shadow backdrop-blur-sm dark:shadow-2xl">

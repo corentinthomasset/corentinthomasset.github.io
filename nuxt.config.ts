@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   routeRules: {
     '/demo/**': { prerender: false },
   },
-  modules: ['@nuxt/icon', '@nuxt/ui', '@nuxt/image', '@vueuse/motion/nuxt', '@vueuse/nuxt'],
+  modules: ['@nuxt/icon', '@nuxt/ui', '@nuxt/image', '@vueuse/motion/nuxt', '@vueuse/nuxt', '@nuxtjs/color-mode'],
   css: ['~/assets/css/main.css'],
   vite: {
     plugins: [tailwindcss()],
@@ -15,5 +15,8 @@ export default defineNuxtConfig({
   icon: {
     mode: 'css',
     cssLayer: 'base',
+  },
+  colorMode: {
+    preference: 'dark',
   },
 })
