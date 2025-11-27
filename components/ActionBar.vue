@@ -55,16 +55,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="hidden md:block" @mousedown.capture="(e) => e.preventDefault()">
-    <div ref="initial-container-el" :class="['m-auto h-16 w-96 rounded-full transition delay-100 duration-300', dragging ? 'bg-foreground/5' : '']" data-container-style="position: static;">
+  <div class="block" @mousedown.capture="(e) => e.preventDefault()">
+    <div ref="initial-container-el" :class="['m-auto h-16 w-full rounded-full transition delay-100 duration-300 md:w-96', dragging ? 'bg-foreground/5' : '']" data-container-style="position: static;">
       <div
         ref="target-el"
-        :class="['bg-muted/40 border-border/50 @container z-50 m-auto flex h-16 w-96 items-center justify-start gap-4 rounded-full border px-6 backdrop-blur-sm dark:shadow-2xl']"
+        :class="['bg-muted/40 border-border/50 @container z-50 m-auto flex h-16 w-full items-center justify-start gap-4 rounded-full border px-6 backdrop-blur-sm md:w-96 dark:shadow-2xl']"
         :style="style + metaStyle"
       >
         <UIcon
           ref="handle-el"
-          class="text-muted-foreground/50 size-4 cursor-move"
+          class="text-muted-foreground/50 hidden size-4 cursor-move md:block"
           name="i-lucide-grip"
           @mousedown="
             () => {

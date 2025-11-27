@@ -95,7 +95,7 @@ onKeyStroke('Enter', (e) => {
     <button
       class="text-md flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl border border-green-400 bg-green-500 px-4 font-semibold text-green-100 shadow hover:bg-green-400 focus:outline-none @md:size-10 @md:border-none @md:bg-transparent @md:px-0 @md:shadow-none @md:hover:bg-black/20 dark:shadow-xl"
     >
-      👋 <span class="@md:hidden">Say hi!</span>
+      👋 <span class="hidden md:inline-block @md:hidden">Say hi!</span>
     </button>
     <template #content>
       <div v-if="store.counter > 3" v-motion-slide-bottom class="text-center">
