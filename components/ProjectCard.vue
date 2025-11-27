@@ -8,10 +8,11 @@ const props = defineProps<{
 }>()
 
 const video = useTemplateRef<HTMLVideoElement>('video-el')
+const canPlay = ref(false)
 watch(
-  () => [props.active, video.value?.readyState],
+  () => props.active && canPlay.value,
   () => {
-    if (props.active && video.value?.readyState === 4) {
+    if (props.active && canPlay.value) {
       video.value?.play()
     } else {
       video.value?.pause()
@@ -29,7 +30,7 @@ watch(
     class="bg-muted/20 border-border relative m-auto block w-[90%] max-w-[900px] overflow-hidden rounded-3xl border md:aspect-3/2 dark:shadow-2xl"
     target="_blank"
   >
-    <video v-if="item.thumbnailMedia" ref="video-el" :poster="item.thumbnailPoster" class="object-fit aspect-3/2 w-full" disablepictureinpicture loop muted playinline>
+    <video v-if="item.thumbnailMedia" ref="video-el" :poster="item.thumbnailPoster" class="object-fit aspect-3/2 w-full" disablepictureinpicture loop muted playinline @canplay="canPlay = true">
       <source :src="item.thumbnailMedia" type="video/webm" />
     </video>
     <template v-else>
