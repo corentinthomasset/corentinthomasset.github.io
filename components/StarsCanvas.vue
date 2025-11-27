@@ -21,7 +21,7 @@ class Dot {
     this.y = y
     this.vx = 0
     this.vy = Math.random() * -0.5
-    this.radius = document.body.getBoundingClientRect().width > 768 ? 1.5 : 0.5
+    this.radius = document.body.getBoundingClientRect().width > 768 ? 1.5 : 0.75
     this.opacity = Math.random() * 0.5 + 0.1
   }
 
