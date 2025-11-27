@@ -22,12 +22,14 @@ watch(
 </script>
 
 <template>
-  <div
+  <a
     v-motion-slide-bottom
     :delay="150 + index * 100"
-    class="bg-muted/20 border-border relative m-auto aspect-2/3 w-[90%] max-w-[900px] overflow-hidden rounded-3xl border md:aspect-3/2 dark:shadow-2xl"
+    :href="item.links[0]?.url"
+    class="bg-muted/20 border-border relative m-auto block w-[90%] max-w-[900px] overflow-hidden rounded-3xl border md:aspect-3/2 dark:shadow-2xl"
+    target="_blank"
   >
-    <video v-if="item.thumbnailMedia" ref="video-el" :poster="item.thumbnailPoster" class="aspect-2/3 w-full object-cover md:aspect-3/2" disablepictureinpicture loop muted playinline>
+    <video v-if="item.thumbnailMedia" ref="video-el" :poster="item.thumbnailPoster" class="object-fit aspect-3/2 w-full" disablepictureinpicture loop muted playinline>
       <source :src="item.thumbnailMedia" type="video/webm" />
     </video>
     <template v-else>
@@ -36,14 +38,14 @@ watch(
         <EncryptedText :pause-duration="3000" :speed="80" text="this project is confidential" />
       </div>
     </template>
-    <div class="absolute bottom-0 left-0 flex w-full flex-col items-start justify-between p-6 text-sm md:flex-row md:items-center">
+    <div class="bottom-0 left-0 flex w-full flex-col items-start justify-between p-6 text-sm md:absolute md:flex-row md:items-center">
       <div class="flex flex-col justify-start gap-2 md:flex-row">
         <h4 class="bg-background/10 rounded px-1 font-semibold backdrop-blur-2xl">{{ item.title }}</h4>
         <p class="text-muted-foreground bg-background/10 rounded px-1 backdrop-blur-2xl">{{ item.affiliation }}</p>
       </div>
       <p class="text-muted-foreground bg-background/10 rounded px-1 backdrop-blur-2xl">{{ item.date }}</p>
     </div>
-  </div>
+  </a>
   <div v-motion-fade :delay="200 + index * 100" class="m-auto max-w-[900px] p-6 text-center">
     <p class="text-muted-foreground text-center text-sm">{{ item.description }}</p>
     <ul class="inline-flex items-center gap-2 p-2">

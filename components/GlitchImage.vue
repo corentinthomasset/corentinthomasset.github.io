@@ -1,14 +1,14 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 const props = defineProps<{ img: string }>()
 </script>
 
 <template>
-  <div class="relative aspect-2/3 max-w-[900px] overflow-hidden opacity-10 md:aspect-3/2">
-    <img :src="img" alt="gitch image" class="relative z-1 block aspect-2/3 w-full object-cover mix-blend-lighten blur-[2px] md:aspect-3/2" />
+  <div class="relative max-w-[900px] overflow-hidden opacity-10 aspect-3/2">
+    <img :src="img" alt="gitch image" class="relative z-1 block w-full object-cover mix-blend-lighten blur-[2px] aspect-3/2" />
     <div class="absolute inset-0 z-10">
-      <div class="glitch_layer absolute inset-0 bg-top-left bg-no-repeat" :style="`background-image: url(${img})`"></div>
-      <div class="glitch_layer absolute inset-0 bg-top-left bg-no-repeat" :style="`background-image: url(${img})`"></div>
-      <div class="glitch_layer absolute inset-0 bg-top-left bg-no-repeat" :style="`background-image: url(${img})`"></div>
+      <div :style="`background-image: url(${img})`" class="glitch_layer absolute inset-0 bg-top-left bg-no-repeat"></div>
+      <div :style="`background-image: url(${img})`" class="glitch_layer absolute inset-0 bg-top-left bg-no-repeat"></div>
+      <div :style="`background-image: url(${img})`" class="glitch_layer absolute inset-0 bg-top-left bg-no-repeat"></div>
     </div>
   </div>
 </template>
