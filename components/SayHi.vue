@@ -7,6 +7,7 @@ import confetti from 'canvas-confetti'
 
 const toast = useToast()
 const store = useStorage('hi-store', { greeted: false, name: 'Bob', counter: 0 })
+const form = useTemplateRef<HTMLFormElement>('hi-form')
 
 type SelectItem = { label: string; value: string }
 const countrySelectItems = computed(() => {
@@ -76,6 +77,10 @@ function fireworks(duration: number) {
   confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } })
   confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } })
 }
+
+onKeyStroke('Enter', (e) => {
+  form.value?.submit()
+})
 </script>
 
 <template>
@@ -97,7 +102,7 @@ function fireworks(duration: number) {
         <div ref="hi-score-counter" class="text-foreground text-8xl font-bold">{{ store.counter }}</div>
         <div class="text-foreground text-4xl">hi score</div>
       </div>
-      <UForm :schema="schema" :state="state" class="w-full max-w-4xl border-none p-6 text-xl" @submit="onSubmit">
+      <UForm ref="hi-form" :schema="schema" :state="state" class="w-full max-w-4xl border-none p-6 text-xl" @submit="onSubmit">
         <div v-motion-slide-bottom class="bg-muted/50 border-border/50 flex items-center justify-between rounded-2xl border p-6 shadow backdrop-blur-sm dark:shadow-2xl">
           <div class="font-semibold">
             <div class="text-sm">{{ state.name || 'Bob' }}</div>
