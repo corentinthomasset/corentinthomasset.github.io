@@ -7,7 +7,7 @@ const props = defineProps<{
   active: boolean
 }>()
 
-const video = useTemplateRef('video-el')
+const video = useTemplateRef<HTMLVideoElement>('video-el')
 watch(
   () => [props.active, video.value?.readyState],
   () => {
