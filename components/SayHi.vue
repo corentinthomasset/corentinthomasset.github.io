@@ -44,6 +44,10 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
   if (counter < 4)
     toast.add({ title: event.data.name, description: `Hi ${'again '.repeat(counter)} from ${name(event.data.country)} ${flag(event.data.country)}!`, progress: false, close: false, color: 'ghost' })
   if (counter === 0) {
+    umami.track('say-hi-once', {
+      name: event.data.name,
+      country: name(event.data.country),
+    })
     setTimeout(() => {
       toast.add({
         title: 'Corentin',
@@ -61,6 +65,10 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
     }, 1000)
   }
   if (counter === 3) {
+    umami.track('say-hi-fanatic', {
+      name: event.data.name,
+      country: name(event.data.country),
+    })
     setTimeout(() => {
       toast.add({ title: 'Corentin', description: `Fanatic clicker mode unlocked 🔥`, progress: false, close: false, color: 'ghost' })
     }, 1000)
@@ -94,6 +102,7 @@ onKeyStroke('Enter', (e) => {
   >
     <button
       class="text-md flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl border border-green-400 bg-green-500 px-4 font-semibold text-green-100 shadow hover:bg-green-400 focus:outline-none @md:size-10 @md:border-none @md:bg-transparent @md:px-0 @md:shadow-none @md:hover:bg-black/20 dark:shadow-xl"
+      @click="umami.track('open-say-hi-dialog')"
     >
       👋 <span class="hidden md:inline-block @md:hidden">Say hi!</span>
     </button>

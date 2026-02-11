@@ -14,12 +14,21 @@ watch(
   () => {
     if (props.active && canPlay.value) {
       video.value?.play()
+      umami.track('play-project-video', {
+        title: props.item.title,
+      })
     } else {
       video.value?.pause()
     }
   },
   { immediate: true }
 )
+
+function handleClick() {
+  umami.track('click-project-card', {
+    url: props.item.links[0]?.url,
+  })
+}
 </script>
 
 <template>
@@ -29,6 +38,7 @@ watch(
     :href="item.links[0]?.url"
     class="bg-muted/20 border-border relative m-auto block w-[90%] max-w-[900px] overflow-hidden rounded-3xl border md:aspect-3/2 dark:shadow-2xl"
     target="_blank"
+    @click="handleClick"
   >
     <video v-if="item.thumbnailMedia" ref="video-el" :poster="item.thumbnailPoster" class="object-fit aspect-3/2 w-full" disablepictureinpicture loop muted playinline @canplay="canPlay = true">
       <source :src="item.thumbnailMedia" type="video/webm" />
