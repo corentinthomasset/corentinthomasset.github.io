@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 const initialContainer = useTemplateRef<HTMLElement>('initial-container-el')
 const dockContainer = useTemplateRef<HTMLElement>('dock-container-el')
 const navContainer = useTemplateRef<HTMLElement>('nav-container-el')
@@ -16,7 +15,7 @@ const { x, y, style } = useDraggable(target, {
   onStart: () => {
     dragging.value = draggable.value
     metaStyle.value = 'position: fixed;'
-    umami.track('dragging-action-bar')
+    if (typeof umami !== 'undefined') umami.track('dragging-action-bar')
   },
   onEnd: () => {
     const tragetRect = target.value?.getBoundingClientRect()

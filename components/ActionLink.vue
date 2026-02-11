@@ -5,9 +5,10 @@ const props = defineProps<{
 }>()
 
 function handleClick() {
-  umami.track('click-action-link', {
-    url: props.url,
-  });
+  if (typeof umami !== 'undefined')
+    umami.track('click-action-link', {
+      url: props.url,
+    })
 }
 </script>
 

@@ -2,9 +2,10 @@
 const props = defineProps<{ icon: string; url: string }>()
 
 function handleClick() {
-  umami.track('click-badge-link', {
-    url: props.url,
-  })
+  if (typeof umami !== 'undefined')
+    umami.track('click-badge-link', {
+      url: props.url,
+    })
 }
 </script>
 

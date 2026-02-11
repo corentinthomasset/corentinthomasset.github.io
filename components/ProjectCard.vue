@@ -14,9 +14,10 @@ watch(
   () => {
     if (props.active && canPlay.value) {
       video.value?.play()
-      umami.track('play-project-video', {
-        title: props.item.title,
-      })
+      if (typeof umami !== 'undefined')
+        umami.track('play-project-video', {
+          title: props.item.title,
+        })
     } else {
       video.value?.pause()
     }
@@ -25,9 +26,10 @@ watch(
 )
 
 function handleClick() {
-  umami.track('click-project-card', {
-    url: props.item.links[0]?.url,
-  })
+  if (typeof umami !== 'undefined')
+    umami.track('click-project-card', {
+      url: props.item.links[0]?.url,
+    })
 }
 </script>
 
