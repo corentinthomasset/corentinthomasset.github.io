@@ -13,6 +13,7 @@
     "@iconify-json/lucide": "^1.2.72",
     "@nuxt/icon": "^2.1.0",
     "@nuxt/image": "^1.11.0",
+    "@nuxt/scripts": "^0.13.2",
     "@nuxt/ui": "^4.1.0",
     "@tailwindcss/vite": "^4.1.16",
     "@vueuse/core": "^14.0.0",

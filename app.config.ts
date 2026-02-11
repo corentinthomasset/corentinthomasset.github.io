@@ -1,16 +1,4 @@
 export default defineAppConfig({
-  app: {
-    head: {
-      scripts: [
-        {
-          src: 'https://telemetry.corentinthomasset.com/script.js',
-          'data-website-id': '079d5604-e5c8-47b8-b059-3c0a46552223',
-          async: true,
-          defer: true,
-        },
-      ],
-    },
-  },
   ui: {
     carousel: {
       slots: {
